@@ -1,0 +1,52 @@
+version: '3'
+
+tasks:
+  dev:
+    desc: Start local Temporal dev server
+    cmds:
+      - temporal server start-dev
+
+  proto:
+    desc: Generate Go and Python code from .proto files
+    cmds:
+      - buf generate
+
+  worker:go:
+    desc: Run the Go upload worker
+    dir: workers/go
+    cmds:
+      - go run .
+
+  worker:py:
+    desc: Run the Python processing worker
+    dir: workers/process-py
+    cmds:
+      - uv run python -m darkroom.worker
+
+  workers:
+    desc: Run both workers in parallel
+    deps: [worker:go, worker:py]
+
+  test:go:
+    dir: workers/go
+    cmds:
+      - go test ./...
+
+  test:py:
+    dir: workers/process-py
+    cmds:
+      - uv run pytest
+
+  test:
+    desc: Run all tests
+    deps: [test:go, test:py]
+
+  lint:
+    desc: Lint both languages
+    cmds:
+      - cmd: golangci-lint run
+        dir: workers/go
+      - cmd: uv run ruff check .
+        dir: workers/process-py
+      - cmd: uv run mypy src
+        dir: workers/process-py

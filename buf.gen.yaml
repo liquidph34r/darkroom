@@ -1,0 +1,14 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/liquidph34r/darkroom/workers/go/gen
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: workers/go/gen
+    opt: paths=source_relative
+  - remote: buf.build/protocolbuffers/python
+    out: workers/process-py/gen
+  - remote: buf.build/protocolbuffers/pyi
+    out: workers/process-py/gen
