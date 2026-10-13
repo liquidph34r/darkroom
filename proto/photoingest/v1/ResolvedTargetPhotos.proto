@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package photoingest.v1;
+
+message ResolvedTargetPhotos {
+    repeated PhotoTarget  photoTargets = 1;
+    string directory = 2;
+}
+
+message PhotoTarget {
+    string name = 1;
+}
