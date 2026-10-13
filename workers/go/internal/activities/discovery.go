@@ -20,6 +20,7 @@ var supportedFileTypes = map[string]bool{
 	".tif":  true,
 	".tiff": true,
 	".webp": true,
+	".raf":  true,
 }
 
 func DiscoverPhotos(ctx context.Context, req *pb.IngestRequest) (*pb.ResolvedTargetPhotos, error) {
@@ -34,15 +35,14 @@ func DiscoverPhotos(ctx context.Context, req *pb.IngestRequest) (*pb.ResolvedTar
 
 	logger.Info("discovering photos", "directory", directory)
 
-	resolvedPhotos := &pb.ResolvedTargetPhotos{
-		Directory: directory,
-	}
+	resolvedPhotos := &pb.ResolvedTargetPhotos{}
 
 	for _, file := range files {
 		if !file.IsDir() && supportedFileTypes[strings.ToLower(filepath.Ext(file.Name()))] {
 			fmt.Printf("appending %s, %s\n", directory, file.Name())
 			photo := &pb.PhotoTarget{
-				Name: file.Name(),
+				Name:      file.Name(),
+				Directory: directory,
 			}
 			resolvedPhotos.PhotoTargets = append(resolvedPhotos.PhotoTargets, photo)
 		}

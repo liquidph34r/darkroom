@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package photoingest.v1;
+
+message FilterBasicResult {
+    string name = 1;
+    string directory = 2;
+    Verdict verdict = 3;
+    repeated string reasons = 4;
+    string content_hash = 5;
+    int32 width = 6;
+    int32 height = 7;
+    double blur_score = 8;
+    double dark_clip_ratio = 9;
+    double bright_clip_ratio = 10;
+    string thumbnail_path = 11;
+}
+
+enum Verdict {
+    VERDICT_UNSPECIFIED = 0;   // buf lint requires a zero value like this
+    VERDICT_PASS = 1;
+    VERDICT_BORDERLINE = 2;
+    VERDICT_REJECT = 3;
+}
+
+message FilterBasicResultArray {
+    repeated FilterBasicResult filter_basic_results = 1;
+}

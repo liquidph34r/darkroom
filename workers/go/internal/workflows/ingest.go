@@ -14,7 +14,7 @@ const (
 	TaskQueueUpload       = "darkroom-uploader"
 )
 
-func IngestDirectory(ctx workflow.Context, req *pb.IngestRequest) (*pb.IngestResult, error) {
+func IngestDirectory(ctx workflow.Context, req *pb.IngestRequest) (*pb.FilterBasicResultArray, error) {
 
 	ao := workflow.ActivityOptions{
 		StartToCloseTimeout: time.Second * 30,
@@ -27,8 +27,19 @@ func IngestDirectory(ctx workflow.Context, req *pb.IngestRequest) (*pb.IngestRes
 		return nil, err
 	}
 
-	var result = &pb.IngestResult{
-		Completed: true,
+	var result pb.FilterBasicResultArray
+
+	filterCtx := workflow.WithTaskQueue(ctx, names.TaskQueueProcess)
+	for _, photo := range test.PhotoTargets {
+		var res pb.FilterBasicResult
+		err := workflow.ExecuteActivity(filterCtx, names.ActivityFilterBasic, photo).Get(filterCtx, &res)
+		if err != nil {
+			return nil, err
+		}
+
+		result.FilterBasicResults = append(result.FilterBasicResults, &res)
+
 	}
-	return result, nil
+
+	return &result, nil
 }

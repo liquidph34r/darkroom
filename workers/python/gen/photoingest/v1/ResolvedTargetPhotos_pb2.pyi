@@ -7,15 +7,15 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ResolvedTargetPhotos(_message.Message):
-    __slots__ = ("photoTargets", "directory")
+    __slots__ = ("photoTargets",)
     PHOTOTARGETS_FIELD_NUMBER: _ClassVar[int]
-    DIRECTORY_FIELD_NUMBER: _ClassVar[int]
     photoTargets: _containers.RepeatedCompositeFieldContainer[PhotoTarget]
-    directory: str
-    def __init__(self, photoTargets: _Optional[_Iterable[_Union[PhotoTarget, _Mapping]]] = ..., directory: _Optional[str] = ...) -> None: ...
+    def __init__(self, photoTargets: _Optional[_Iterable[_Union[PhotoTarget, _Mapping]]] = ...) -> None: ...
 
 class PhotoTarget(_message.Message):
-    __slots__ = ("name",)
+    __slots__ = ("name", "directory")
     NAME_FIELD_NUMBER: _ClassVar[int]
+    DIRECTORY_FIELD_NUMBER: _ClassVar[int]
     name: str
-    def __init__(self, name: _Optional[str] = ...) -> None: ...
+    directory: str
+    def __init__(self, name: _Optional[str] = ..., directory: _Optional[str] = ...) -> None: ...

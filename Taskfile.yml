@@ -19,7 +19,7 @@ tasks:
 
   worker:py:
     desc: Run the Python processing worker
-    dir: workers/process-py
+    dir: workers/python
     cmds:
       - uv run python -m darkroom.worker
 
@@ -33,7 +33,7 @@ tasks:
       - go test ./...
 
   test:py:
-    dir: workers/process-py
+    dir: workers/python
     cmds:
       - uv run pytest
 
@@ -47,6 +47,47 @@ tasks:
       - cmd: golangci-lint run
         dir: workers/go
       - cmd: uv run ruff check .
-        dir: workers/process-py
+        dir: workers/python
       - cmd: uv run mypy src
-        dir: workers/process-py
+        dir: workers/python
+
+  dev:
+    desc: Temporal dev server (history persists in temporal.db)
+    cmds:
+      - temporal server start-dev --db-filename temporal.db
+
+  wait:temporal:
+    internal: true
+    cmds:
+      - powershell -NoProfile -Command "while (-not (Test-NetConnection localhost -Port 7233 -InformationLevel Quiet)) { Start-Sleep -Seconds 1 }"
+
+  worker:orchestrator:
+    desc: Go workflow worker
+    dir: workers/go
+    deps: [wait:temporal]
+    cmds:
+      - go run ./cmd/orchestrator
+
+  worker:uploader:
+    desc: Go upload/discovery worker
+    dir: workers/go
+    deps: [wait:temporal]
+    cmds:
+      - go run ./cmd/uploader
+
+  worker:py:
+    desc: Python filter worker
+    dir: workers/python
+    deps: [wait:temporal]
+    env:
+      PYTHONPATH: gen
+    cmds:
+      - uv run python -m darkroom_py.worker
+
+  workers:
+    desc: All three workers (server must already be running)
+    deps: [worker:orchestrator, worker:uploader, worker:py]
+
+  up:
+    desc: Server plus all workers
+    deps: [dev, workers]

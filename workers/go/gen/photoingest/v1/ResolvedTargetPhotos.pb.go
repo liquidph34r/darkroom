@@ -24,7 +24,6 @@ const (
 type ResolvedTargetPhotos struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PhotoTargets  []*PhotoTarget         `protobuf:"bytes,1,rep,name=photoTargets,proto3" json:"photoTargets,omitempty"`
-	Directory     string                 `protobuf:"bytes,2,opt,name=directory,proto3" json:"directory,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -66,16 +65,10 @@ func (x *ResolvedTargetPhotos) GetPhotoTargets() []*PhotoTarget {
 	return nil
 }
 
-func (x *ResolvedTargetPhotos) GetDirectory() string {
-	if x != nil {
-		return x.Directory
-	}
-	return ""
-}
-
 type PhotoTarget struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Directory     string                 `protobuf:"bytes,2,opt,name=directory,proto3" json:"directory,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -117,16 +110,23 @@ func (x *PhotoTarget) GetName() string {
 	return ""
 }
 
+func (x *PhotoTarget) GetDirectory() string {
+	if x != nil {
+		return x.Directory
+	}
+	return ""
+}
+
 var File_photoingest_v1_ResolvedTargetPhotos_proto protoreflect.FileDescriptor
 
 const file_photoingest_v1_ResolvedTargetPhotos_proto_rawDesc = "" +
 	"\n" +
-	")photoingest/v1/ResolvedTargetPhotos.proto\x12\x0ephotoingest.v1\"u\n" +
+	")photoingest/v1/ResolvedTargetPhotos.proto\x12\x0ephotoingest.v1\"W\n" +
 	"\x14ResolvedTargetPhotos\x12?\n" +
-	"\fphotoTargets\x18\x01 \x03(\v2\x1b.photoingest.v1.PhotoTargetR\fphotoTargets\x12\x1c\n" +
-	"\tdirectory\x18\x02 \x01(\tR\tdirectory\"!\n" +
+	"\fphotoTargets\x18\x01 \x03(\v2\x1b.photoingest.v1.PhotoTargetR\fphotoTargets\"?\n" +
 	"\vPhotoTarget\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04nameB\xd5\x01\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1c\n" +
+	"\tdirectory\x18\x02 \x01(\tR\tdirectoryB\xd5\x01\n" +
 	"\x12com.photoingest.v1B\x19ResolvedTargetPhotosProtoP\x01ZKgithub.com/liquidph34r/darkroom/workers/go/gen/photoingest/v1;photoingestv1\xa2\x02\x03PXX\xaa\x02\x0ePhotoingest.V1\xca\x02\x0ePhotoingest\\V1\xe2\x02\x1aPhotoingest\\V1\\GPBMetadata\xea\x02\x0fPhotoingest::V1b\x06proto3"
 
 var (

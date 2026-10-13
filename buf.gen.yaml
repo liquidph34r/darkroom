@@ -9,6 +9,6 @@ plugins:
     out: workers/go/gen
     opt: paths=source_relative
   - remote: buf.build/protocolbuffers/python
-    out: workers/process-py/gen
+    out: workers/python/gen
   - remote: buf.build/protocolbuffers/pyi
-    out: workers/process-py/gen
+    out: workers/python/gen

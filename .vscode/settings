@@ -1,0 +1,3 @@
+{
+  "python.analysis.extraPaths": ["workers/python/gen"],
+  "python.defaultInterpreterPath": "workers/python/.venv/Scripts/python.exe"

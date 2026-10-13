@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)photoingest/v1/ResolvedTargetPhotos.proto\x12\x0ephotoingest.v1\"u\n\x14ResolvedTargetPhotos\x12?\n\x0cphotoTargets\x18\x01 \x03(\x0b\x32\x1b.photoingest.v1.PhotoTargetR\x0cphotoTargets\x12\x1c\n\tdirectory\x18\x02 \x01(\tR\tdirectory\"!\n\x0bPhotoTarget\x12\x12\n\x04name\x18\x01 \x01(\tR\x04nameB\xd5\x01\n\x12\x63om.photoingest.v1B\x19ResolvedTargetPhotosProtoP\x01ZKgithub.com/liquidph34r/darkroom/workers/go/gen/photoingest/v1;photoingestv1\xa2\x02\x03PXX\xaa\x02\x0ePhotoingest.V1\xca\x02\x0ePhotoingest\\V1\xe2\x02\x1aPhotoingest\\V1\\GPBMetadata\xea\x02\x0fPhotoingest::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)photoingest/v1/ResolvedTargetPhotos.proto\x12\x0ephotoingest.v1\"W\n\x14ResolvedTargetPhotos\x12?\n\x0cphotoTargets\x18\x01 \x03(\x0b\x32\x1b.photoingest.v1.PhotoTargetR\x0cphotoTargets\"?\n\x0bPhotoTarget\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x1c\n\tdirectory\x18\x02 \x01(\tR\tdirectoryB\xd5\x01\n\x12\x63om.photoingest.v1B\x19ResolvedTargetPhotosProtoP\x01ZKgithub.com/liquidph34r/darkroom/workers/go/gen/photoingest/v1;photoingestv1\xa2\x02\x03PXX\xaa\x02\x0ePhotoingest.V1\xca\x02\x0ePhotoingest\\V1\xe2\x02\x1aPhotoingest\\V1\\GPBMetadata\xea\x02\x0fPhotoingest::V1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,7 +33,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n\022com.photoingest.v1B\031ResolvedTargetPhotosProtoP\001ZKgithub.com/liquidph34r/darkroom/workers/go/gen/photoingest/v1;photoingestv1\242\002\003PXX\252\002\016Photoingest.V1\312\002\016Photoingest\\V1\342\002\032Photoingest\\V1\\GPBMetadata\352\002\017Photoingest::V1'
   _globals['_RESOLVEDTARGETPHOTOS']._serialized_start=61
-  _globals['_RESOLVEDTARGETPHOTOS']._serialized_end=178
-  _globals['_PHOTOTARGET']._serialized_start=180
+  _globals['_RESOLVEDTARGETPHOTOS']._serialized_end=148
+  _globals['_PHOTOTARGET']._serialized_start=150
   _globals['_PHOTOTARGET']._serialized_end=213
 # @@protoc_insertion_point(module_scope)
